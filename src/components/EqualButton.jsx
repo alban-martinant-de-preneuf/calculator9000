@@ -1,9 +1,11 @@
 function EqualButton() {
     return (
         <>
-            <button className="equal-button">=</button>
+            <div className="equal_div">
+                <button className="equal_button">=</button>
+            </div>
         </>
     );
 }
 
-export default Title;
+export default EqualButton;

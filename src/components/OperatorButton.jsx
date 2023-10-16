@@ -1,7 +1,13 @@
 function OperatorButton(operator) {
+    const operators = ['+', '-', '*', '/']
+
     return (
         <>
-            <button className="operator-button">{operator}</button>
+            <div className="operators_div">
+                {operators.map((operator, id) => (
+                    <button className="operator_button" key={id}>{operator}</button>
+                ))}
+            </div>
         </>
     );
 }
