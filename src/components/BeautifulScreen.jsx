@@ -1,8 +1,8 @@
-function BeautifulScreen() {
+function BeautifulScreen({ calcul, result }) {
     return (
         <div className="screen">
-            <div className="current_calcul">0</div>
-            <div className="result">0</div>
+            <div className="current_calcul">{calcul}</div>
+            <div className="result">{result}</div>
         </div>
     );
 }

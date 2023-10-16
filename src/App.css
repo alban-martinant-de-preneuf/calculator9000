@@ -1,9 +1,14 @@
+#root {
+    text-align: center;
+}
+
 .calculator {
     border: 1px solid #ddd;
     background-color: #777;
     border-radius: 5px;
     width: 300px;
-    padding: 10px;
+    padding: 20px;
+    margin: auto;
 }
 
 .screen {
@@ -41,8 +46,8 @@
 
 }
 
-.number_button:last-child {
-    width: 219px;
+.number_button:nth-last-child(2) {
+    width: 144px;
 }
 
 .numbers_operators_div {
