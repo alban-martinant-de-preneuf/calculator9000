@@ -32,7 +32,8 @@
 
 .number_button,
 .operator_button,
-.equal_button {
+.equal_button,
+.additional_button {
     width: 69px;
     height: 70px;
     margin: 3px;

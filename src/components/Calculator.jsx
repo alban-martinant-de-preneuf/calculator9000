@@ -5,17 +5,18 @@ import NumberButton from './NumberButton';
 import OperatorButton from './OperatorButton';
 import EqualButton from './EqualButton';
 import { useState } from 'react';
+import AdditionalButtons from './AdditionalButtons';
 
 function Calculator() {
 
-    const [calcul, setCalcul] = useState(0);
+    const [calcul, setCalcul] = useState("0");
     const [result, setResult] = useState(0);
 
     const handleClick = (e) => {
         calcul == 0 ? setCalcul(e.target.value) : setCalcul(calcul + e.target.value);
     }
 
-    const handleEqual = (e) => {
+    const handleEqual = () => {
     //     let numbers = calcul.split(/[^0-9]/);
     //     const operators = calcul.split(/[0-9]/).filter(operator => operator != '');
     //     calculate(numbers, operators);
@@ -39,15 +40,25 @@ function Calculator() {
     //     });
     // }
 
+    const handleAC = () => {
+        setCalcul(0);
+        setResult(0);
+    }
+
+    const handleBack = () => {
+        calcul.length > 1 ? setCalcul(calcul.slice(0, -1)) : setCalcul(0);
+    }
+
     return (
         <>
             <div className="calculator">
                 <BeautifulScreen calcul={calcul} result={result} />
+                <AdditionalButtons handleAC={handleAC} handleBack={handleBack} />
                 <div className="numbers_operators_div">
                     <NumberButton handleClick={handleClick} />
                     <OperatorButton handleClick={handleClick} />
                 </div>
-                <EqualButton handleClick={handleEqual} />
+                <EqualButton handleEqual={handleEqual} />
             </div>
         </>
     );
