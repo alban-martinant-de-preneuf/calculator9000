@@ -43,7 +43,13 @@
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+}
 
+.number_button:active,
+.operator_button:active,
+.equal_button:active {
+    box-shadow: none;
+    background-color: #444;
 }
 
 .number_button:nth-last-child(2) {
