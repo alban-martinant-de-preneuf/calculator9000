@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+// import ReactDOM from 'react-dom/client';
 import BeautifulScreen from './BeautifulScreen';
 import NumberButton from './NumberButton';
 import OperatorButton from './OperatorButton';
@@ -48,26 +48,8 @@ function Calculator() {
     const handleEqual = () => {
         //     let numbers = calcul.split(/[^0-9]/);
         //     const operators = calcul.split(/[0-9]/).filter(operator => operator != '');
-        //     calculate(numbers, operators);
         setResult(eval(calcul));
     }
-
-    // const calculate = (numbers, operators) => {
-    //     operators.forEach((operator) => {
-    //         if (operator == '*' || operator == '/') {
-    //             if (operator == '*') {
-    //                 numbers[operators.indexOf(operator)] = parseInt(numbers[operators.indexOf(operator)]) * parseInt(numbers[operators.indexOf(operator) + 1]);
-    //             }
-    //             else {
-    //                 numbers[operators.indexOf(operator)] = parseInt(numbers[operators.indexOf(operator)]) / parseInt(numbers[operators.indexOf(operator) + 1]);
-    //             }
-    //             numbers.splice[operators.indexOf(operator) + 1, 1];
-    //             operators.splice[operators.indexOf(operator), 1];
-
-    //         }
-    //         console.log(numbers, operators);
-    //     });
-    // }
 
     const handleAC = () => {
         setCalcul(0);
@@ -89,6 +71,7 @@ function Calculator() {
                 </div>
                 <EqualButton handleEqual={handleEqual} />
             </div>
+            {result > 9000 && <h2>IT'S OVER 9000 !</h2>}
         </>
     );
 }
