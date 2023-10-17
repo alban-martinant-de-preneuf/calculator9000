@@ -87,3 +87,12 @@
     font-weight: bold;
     text-align: right;
 }
+
+.additional_button:first-child {
+    width: 144px;
+}
+
+.additional_button:last-child {
+    color: #eee;
+    background-color: #999;
+}

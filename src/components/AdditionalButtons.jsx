@@ -1,9 +1,9 @@
-function AdditionalButtons({ handleAC, handleBack}) {
+function AdditionalButtons({ handleAC, handleBack, handleSave}) {
     return (
         <div className="additionald_div">
             <button className="additional_button" onClick={handleAC}>AC</button>
             <button className="additional_button" onClick={handleBack}>←</button>
-            {/* <button onClick={handleMemory}>M</button> */}
+            <button className="additional_button" onClick={handleSave}>save</button>
         </div>
     );
 }

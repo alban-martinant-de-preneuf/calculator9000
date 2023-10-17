@@ -5,7 +5,7 @@ function OperatorButton({ handleClick }) {
         <>
             <div className="operators_div">
                 {operators.map((operator, id) => (
-                    <button className="operator_button" key={id} onClick={handleClick} value={operator}>{operator}</button>
+                    <button className="operator_button" key={`operator-${id}`} onClick={handleClick} value={operator}>{operator}</button>
                 ))}
             </div>
         </>
