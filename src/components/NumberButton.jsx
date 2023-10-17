@@ -5,7 +5,7 @@ function NumberButton({ handleClick }) {
         <>
             <div className="numbers_div">
                 {numbers.map((number, id) => (
-                    <button className="number_button" key={id} onClick={handleClick} value={number}> {number}</button>
+                    <button className="number_button" key={`number-${id}`} onClick={handleClick} value={number}> {number}</button>
                 ))}
                 <button className="number_button" onClick={handleClick} value=".">.</button>
             </div>

@@ -32,7 +32,8 @@
 
 .number_button,
 .operator_button,
-.equal_button {
+.equal_button,
+.additional_button {
     width: 69px;
     height: 70px;
     margin: 3px;
@@ -85,4 +86,13 @@
     font-size: 20px;
     font-weight: bold;
     text-align: right;
+}
+
+.additional_button:first-child {
+    width: 144px;
+}
+
+.additional_button:last-child {
+    color: #eee;
+    background-color: #999;
 }
