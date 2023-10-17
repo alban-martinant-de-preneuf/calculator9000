@@ -21,6 +21,7 @@ function Calculator() {
 
     const handleKeyDown = (e) => {
         console.log(e.key);
+        e.preventDefault();
         if (e.key >= 0 && e.key <= 9) {
             calcul == 0 ? setCalcul(e.key) : setCalcul(calcul + e.key);
         }
