@@ -3,6 +3,8 @@
 session_name('calculator9000');
 session_start();
 
+header('Access-Control-Allow-Origin: http://localhost:5173');
+
 $db = getDatabase();
 
 function getDatabase(): PDO {

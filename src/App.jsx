@@ -1,14 +1,23 @@
-import { useState } from 'react'
-import Title from './components/Title'
-import Calculator from './components/Calculator'
-import './App.css'
+import Header from './components/Header';
+import Calculator from './components/Calculator';
+import FormConnection from './components/FormConnection';
+import { useState } from 'react';
+import './App.css';
 
 function App() {
 
+  const [userConnected, setUserConnected] = useState({ isUserConnected: false, user: {} });
+  const [displayForm, setDisplayForm] = useState(false);
+
+  const handleConnection = () => {
+    setDisplayForm(!displayForm);
+  }
+
   return (
     <>
-      <Title />
-      <Calculator />
+      <Header handleConnection={handleConnection} userConnected={userConnected} setUserConnected={setUserConnected} />
+      <Calculator displayForm={displayForm} />
+      {displayForm && <FormConnection setUserConnected={setUserConnected} setDisplayForm={setDisplayForm} />}
     </>
   )
 }

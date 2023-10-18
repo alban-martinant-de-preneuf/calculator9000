@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom/client';
 import BeautifulScreen from './BeautifulScreen';
 import NumberButton from './NumberButton';
 import OperatorButton from './OperatorButton';
@@ -7,17 +6,19 @@ import EqualButton from './EqualButton';
 import { useState, useEffect } from 'react';
 import AdditionalButtons from './AdditionalButtons';
 
-function Calculator() {
+function Calculator({ displayForm }) {
 
     const [calcul, setCalcul] = useState("0");
     const [result, setResult] = useState(0);
 
     useEffect(() => {
-        document.addEventListener('keydown', handleKeyDown);
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown);
+        if (!displayForm) {
+            document.addEventListener('keydown', handleKeyDown);
+            return () => {
+                document.removeEventListener('keydown', handleKeyDown);
+            }
         }
-    }, [calcul]);
+    }, [calcul, displayForm]);
 
     const handleKeyDown = (e) => {
         e.preventDefault();
