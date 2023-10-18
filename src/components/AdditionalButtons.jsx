@@ -1,4 +1,21 @@
-function AdditionalButtons({ handleAC, handleBack, handleSave}) {
+function AdditionalButtons({ handleAC, handleBack, calcul, result, userConnected}) {
+
+    const handleSave = async () => {
+        const formData = new FormData();
+        formData.append('calcul', calcul);
+        formData.append('result', result);
+
+        const response = await fetch(`http://localhost/calculator9000/backend/operation.php?save-operation=true&sessionId=${userConnected.sessionId}`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data);
+    }
+
     return (
         <div className="additionald_div">
             <button className="additional_button" onClick={handleAC}>AC</button>

@@ -1,6 +1,6 @@
 <?php
 
-include_once 'dbConnection.php';
+require_once 'dbConnection.php';
 
 function getUser(string $email, PDO $db): ?array
 {
@@ -79,7 +79,12 @@ if (isset($_GET['login'])) {
 
     $_SESSION['user'] = $user;
 
-    echo json_encode(['message' => 'User logged in.', 'success' => true, 'user' => [$user['id'], $user['email']]]);
+    echo json_encode([
+        'message' => 'User logged in.',
+        'success' => true,
+        'user' => [$user['id'], $user['email']],
+        'sessionId' => [session_id()]
+    ]);
 }
 
 if (isset($_GET['logout'])) {

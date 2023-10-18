@@ -34,6 +34,7 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
 
     const handleSigninSubmit = async (e) => {
         e.preventDefault();
+        console.log(e.target);
         const formData = new FormData();
         formData.append('email', signinFormData.email);
         formData.append('password', signinFormData.password);
@@ -72,8 +73,15 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
         const data = await response.json();
         setMsg(data.message);
         if (data.success) {
-            setUserConnected({ isUserConnected: true, user: data.user });
-            setDisplayForm(false);
+            setUserConnected({
+                isUserConnected: true,
+                user: data.user,
+                sessionId: data.sessionId
+            });
+            setTimeout(() => {
+                setMsg('');
+                setDisplayForm(false);
+            }, 2000);
         }
     }
 

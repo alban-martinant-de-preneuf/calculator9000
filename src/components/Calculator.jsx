@@ -6,7 +6,7 @@ import EqualButton from './EqualButton';
 import { useState, useEffect } from 'react';
 import AdditionalButtons from './AdditionalButtons';
 
-function Calculator({ displayForm }) {
+function Calculator({ displayForm, userConnected }) {
 
     const [calcul, setCalcul] = useState("0");
     const [result, setResult] = useState(0);
@@ -65,7 +65,7 @@ function Calculator({ displayForm }) {
         <>
             <div className="calculator">
                 <BeautifulScreen calcul={calcul} result={result} />
-                <AdditionalButtons handleAC={handleAC} handleBack={handleBack} />
+                <AdditionalButtons handleAC={handleAC} handleBack={handleBack} userConnected={userConnected} calcul={calcul} result={result} />
                 <div className="numbers_operators_div">
                     <NumberButton handleClick={handleClick} />
                     <OperatorButton handleClick={handleClick} />
