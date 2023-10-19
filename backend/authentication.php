@@ -1,6 +1,7 @@
 <?php
 
 use \Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 require_once 'dbConnection.php';
 
@@ -68,7 +69,7 @@ if (isset($_GET['login'])) {
 
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
+
     $user = getUser($email, $db);
 
     if (!$user) {
@@ -106,4 +107,24 @@ if (isset($_GET['logout'])) {
         setcookie('jwtToken', $_COOKIE['jwtToken'], time(), '/', '', false, true);
     }
     echo json_encode(['message' => 'User logged out.', 'success' => true]);
+}
+
+if (isset($_GET['check-auth'])) {
+    if (isset($_COOKIE['jwtToken'])) {
+        $jwtToken = $_COOKIE['jwtToken'];
+        $key = $_ENV['JWT_KEY'];
+        try {
+            $decodedToken = JWT::decode($jwtToken, new Key($key, 'HS256'));
+            echo json_encode([
+                'message' => 'User logged in.',
+                'success' => true,
+                'user' => [$decodedToken->id, $decodedToken->email]]);
+        } catch (Exception $e) {
+            echo json_encode(['message' => 'Not logged in.', 'success' => false]);
+            die();
+        }
+    } else {
+        echo json_encode(['message' => 'Not logged in.', 'success' => false]);
+        die();
+    }
 }
