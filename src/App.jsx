@@ -6,7 +6,11 @@ import './App.css';
 
 function App() {
 
-  const [userConnected, setUserConnected] = useState({ isUserConnected: false, user: {} });
+  const [userConnected, setUserConnected] = useState({
+    isUserConnected: false,
+    user: {},
+    sessionId: null
+  });
   const [displayForm, setDisplayForm] = useState(false);
 
   const handleConnection = () => {
@@ -16,7 +20,7 @@ function App() {
   return (
     <>
       <Header handleConnection={handleConnection} userConnected={userConnected} setUserConnected={setUserConnected} />
-      <Calculator displayForm={displayForm} />
+      <Calculator displayForm={displayForm} userConnected={userConnected} />
       {displayForm && <FormConnection setUserConnected={setUserConnected} setDisplayForm={setDisplayForm} />}
     </>
   )

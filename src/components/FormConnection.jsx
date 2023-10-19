@@ -6,38 +6,12 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
     const [loginOrSignin, setLoginOrSignin] = useState('login');
     const [msg, setMsg] = useState('');
 
-    const [signinFormData, setSigninformData] = useState({
-        email: '',
-        password: '',
-        passwordConfirm: ''
-    });
-
-    const [loginFormData, setLoginformData] = useState({
-        email: '',
-        password: ''
-    });
-
-    const handleSigninChange = (e) => {
-        setSigninformData({
-            ...signinFormData,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const handleLoginChange = (e) => {
-        console.log(loginFormData);
-        setLoginformData({
-            ...loginFormData,
-            [e.target.name]: e.target.value
-        })
-    }
-
     const handleSigninSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('email', signinFormData.email);
-        formData.append('password', signinFormData.password);
-        formData.append('passwordConfirm', signinFormData.passwordConfirm);
+        formData.append('email', e.target.email.value);
+        formData.append('password', e.target.password.value);
+        formData.append('passwordConfirm', e.target.passwordConfirm.value);
 
         const response = await fetch('http://localhost/calculator9000/backend/authentication.php?signin=true', {
             method: 'POST',
@@ -59,8 +33,8 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('email', loginFormData.email);
-        formData.append('password', loginFormData.password);
+        formData.append('email', e.target.email.value);
+        formData.append('password', e.target.password.value);
 
         const response = await fetch('http://localhost/calculator9000/backend/authentication.php?login=true', {
             method: 'POST',
@@ -72,8 +46,15 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
         const data = await response.json();
         setMsg(data.message);
         if (data.success) {
-            setUserConnected({ isUserConnected: true, user: data.user });
-            setDisplayForm(false);
+            setUserConnected({
+                isUserConnected: true,
+                user: data.user,
+                sessionId: data.sessionId
+            });
+            setTimeout(() => {
+                setMsg('');
+                setDisplayForm(false);
+            }, 2000);
         }
     }
 
@@ -83,38 +64,41 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
 
     return (
         <>
-            <div className="modal">
-                <p className='auth_msg'>{msg}</p>
-                {loginOrSignin === 'login' ?
-                    (
-                        <div className="login">
-                            <h2>Connection</h2>
-                            <form onChange={handleLoginChange} onSubmit={handleLoginSubmit}>
-                                <label htmlFor="email">Email</label>
-                                <input type="email" id="email" name="email" />
-                                <label htmlFor="password">Password</label>
-                                <input type="password" id="password" name="password" />
-                                <button type="submit">Submit</button>
-                            </form>
-                            <button onClick={changeForm}>Inscription</button>
-                        </div>
-                    ) : (
-                        <div className="signin">
-                            <h2>Inscription</h2>
-                            <form onChange={handleSigninChange} onSubmit={handleSigninSubmit}>
-                                <label htmlFor="email">Email</label>
-                                <input type="email" id="email" name="email" />
-                                <label htmlFor="password">Password</label>
-                                <input type="password" id="password" name="password" />
-                                <label htmlFor="password_confirm">Password</label>
-                                <input type="password" id="password_confirm" name="passwordConfirm" />
-                                <button type="submit">Sign in</button>
-                            </form>
-                            <button onClick={changeForm}>Connection</button>
-                        </div>
-                    )
-                }
-            </div >
+            <div id="modal_container">
+                <div id="modal">
+                    <button className="close_button" onClick={() => setDisplayForm(false)}>X</button>
+                    <p className='auth_msg'>{msg}</p>
+                    {loginOrSignin === 'login' ?
+                        (
+                            <div className="form_container">
+                                <h2>Connection</h2>
+                                <form onSubmit={handleLoginSubmit}>
+                                    <label htmlFor="email">Email</label>
+                                    <input type="email" id="email" name="email" />
+                                    <label htmlFor="password">Password</label>
+                                    <input type="password" id="password" name="password" />
+                                    <button type="submit">Login</button>
+                                </form>
+                                <button onClick={changeForm} className='switch_button'>Inscription</button>
+                            </div>
+                        ) : (
+                            <div className="form_container">
+                                <h2>Inscription</h2>
+                                <form onSubmit={handleSigninSubmit}>
+                                    <label htmlFor="email">Email</label>
+                                    <input type="email" id="email" name="email" />
+                                    <label htmlFor="password">Password</label>
+                                    <input type="password" id="password" name="password" />
+                                    <label htmlFor="password_confirm">Password</label>
+                                    <input type="password" id="password_confirm" name="passwordConfirm" />
+                                    <button type="submit">Sign in</button>
+                                </form>
+                                <button onClick={changeForm} className='switch_button'>Connection</button>
+                            </div>
+                        )
+                    }
+                </div >
+            </div>
         </>
     )
 }

@@ -1,9 +1,12 @@
 <?php
 
-session_name('calculator9000');
-session_start();
-
 header('Access-Control-Allow-Origin: http://localhost:5173');
+
+if (isset($_GET['sessionId'])) {
+    session_id($_GET['sessionId']);
+}
+
+session_start();
 
 $db = getDatabase();
 

@@ -1,13 +1,18 @@
 <?php
 
-include_once 'dbConnection.php';
+require_once 'dbConnection.php';
+
+if (!isset($_SESSION['user'])) {
+    echo json_encode(['message' => 'Not logged in.', 'success' => false]);
+    die();
+}
 
 if (isset($_GET['save-operation'])) {
-    if (!isset($_POST['operation'])) {
-        echo json_encode(['error' => 'Nothing to save.']);
+    if (!isset($_POST['calcul'])) {
+        echo json_encode(['message' => 'Nothing to save.', 'success' => false]);
         die();
     }
-    $operation = $_POST['operation'];
+    $operation = $_POST['calcul'];
     $result = $_POST['result'];
     $user_id = $_SESSION['user']['id'];
 
@@ -18,7 +23,7 @@ if (isset($_GET['save-operation'])) {
         'owner_id' => $user_id]
     );
 
-    echo json_encode(['success' => 'Operation saved.']);
+    echo json_encode(['message' => 'Operation saved.', 'success' => true]);
 }
 
 if (isset($_GET['get-operations'])) {
