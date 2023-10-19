@@ -1,7 +1,5 @@
 <?php
 
-require 'vendor/autoload.php';
-
 use \Firebase\JWT\JWT;
 
 require_once 'dbConnection.php';
@@ -53,10 +51,10 @@ if (isset($_GET['login'])) {
     ];
 
     $key = $_ENV['JWT_KEY'];
-    
+
     $jwt = JWT::encode($payload, $key, 'HS256');
 
-    setcookie('jwtToken', $jwt, time() + 3600, '/', '', true, true);
+    setcookie('jwtToken', $jwt, time() + 3600000, '/', '', false, true);
 
     echo json_encode([
         'message' => 'User logged in.',

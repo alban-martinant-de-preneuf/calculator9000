@@ -20,8 +20,18 @@ function Header({ handleConnection, userConnected, setUserConnected }) {
     }
 
     const handleCalculationSaved = async () => {
-        const response = await fetch(`http://localhost/calculator9000/backend/operation.php?get-operations=true&sessionId=${userConnected.sessionId}`, {
+        // const response = await fetch(`http://localhost/calculator9000/backend/operation.php?get-operations=true&sessionId=${userConnected.sessionId}`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Accept': 'application/json'
+        //     }
+        // });
+        // const data = await response.json();
+        // console.log(data);
+
+        const response = await fetch(`http://localhost/calculator9000/backend/operation.php?get-operations=true`, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json'
             }

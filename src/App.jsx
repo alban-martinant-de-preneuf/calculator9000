@@ -8,8 +8,7 @@ function App() {
 
   const [userConnected, setUserConnected] = useState({
     isUserConnected: false,
-    user: {},
-    sessionId: null
+    user: {}
   });
   const [displayForm, setDisplayForm] = useState(false);
 
