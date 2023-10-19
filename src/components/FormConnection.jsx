@@ -36,7 +36,28 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
         formData.append('email', e.target.email.value);
         formData.append('password', e.target.password.value);
 
-        const response = await fetch('http://localhost/calculator9000/backend/authentication.php?login=true', {
+        // const response = await fetch('http://localhost/calculator9000/backend/authentication.php?login=true', {
+        //     method: 'POST',
+        //     body: formData,
+        //     headers: {
+        //         'Accept': 'application/json'
+        //     }
+        // });
+        // const data = await response.json();
+        // setMsg(data.message);
+        // if (data.success) {
+        //     setUserConnected({
+        //         isUserConnected: true,
+        //         user: data.user,
+        //         sessionId: data.sessionId
+        //     });
+        //     setTimeout(() => {
+        //         setMsg('');
+        //         setDisplayForm(false);
+        //     }, 2000);
+        // }
+
+        const response = await fetch('http://localhost/calculator9000/backend/jwtauth.php?login=true', {
             method: 'POST',
             body: formData,
             headers: {
@@ -44,18 +65,8 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
             }
         });
         const data = await response.json();
-        setMsg(data.message);
-        if (data.success) {
-            setUserConnected({
-                isUserConnected: true,
-                user: data.user,
-                sessionId: data.sessionId
-            });
-            setTimeout(() => {
-                setMsg('');
-                setDisplayForm(false);
-            }, 2000);
-        }
+        console.log(data);
+
     }
 
     const changeForm = () => {

@@ -23,5 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# database infos
+# backend
 backend/db.ini
+backend/vendor/
+.env

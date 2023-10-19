@@ -17,9 +17,9 @@ if (isset($_GET['signin'])) {
         echo json_encode(['message' => 'Please fill in all fields.', 'success' => false]);
         die();
     }
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $password2 = $_POST['passwordConfirm'];
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $password2 = htmlspecialchars($_POST['passwordConfirm']);
 
     foreach ($_POST as &$arg) {
         if (empty($arg)) {
@@ -54,8 +54,6 @@ if (isset($_GET['login'])) {
         echo json_encode(['message' => 'Please fill in all fields.', 'success' => false]);
         die();
     }
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
     foreach ($_POST as &$arg) {
         if (empty($arg)) {
@@ -64,6 +62,9 @@ if (isset($_GET['login'])) {
         }
         $arg = htmlspecialchars($arg);
     }
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
     $user = getUser($email, $db);
 
