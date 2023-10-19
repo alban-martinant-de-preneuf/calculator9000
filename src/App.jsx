@@ -1,10 +1,31 @@
 import Header from './components/Header';
 import Calculator from './components/Calculator';
 import FormConnection from './components/FormConnection';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+
+  const checkConnection = async () => {
+    const response = await fetch('http://localhost/calculator9000/backend/authentication.php?check-auth=true', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    const data = await response.json();
+    if (data.success) {
+      setUserConnected({
+        isUserConnected: true,
+        user: data.user
+      });
+    }
+  }
+
+  useEffect(() => {
+    checkConnection();
+  }, []);
 
   const [userConnected, setUserConnected] = useState({
     isUserConnected: false,
