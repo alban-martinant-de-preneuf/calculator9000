@@ -1,5 +1,7 @@
 <?php
 
+use \Firebase\JWT\JWT;
+
 require_once 'dbConnection.php';
 
 function getUser(string $email, PDO $db): ?array
@@ -17,9 +19,6 @@ if (isset($_GET['signin'])) {
         echo json_encode(['message' => 'Please fill in all fields.', 'success' => false]);
         die();
     }
-    $email = htmlspecialchars($_POST['email']);
-    $password = htmlspecialchars($_POST['password']);
-    $password2 = htmlspecialchars($_POST['passwordConfirm']);
 
     foreach ($_POST as &$arg) {
         if (empty($arg)) {
@@ -28,6 +27,10 @@ if (isset($_GET['signin'])) {
         }
         $arg = htmlspecialchars($arg);
     }
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password2 = $_POST['passwordConfirm'];
 
     if ($password !== $password2) {
         echo json_encode(['message' => 'Passwords do not match.', 'success' => false]);
@@ -55,17 +58,17 @@ if (isset($_GET['login'])) {
         die();
     }
 
-    foreach ($_POST as &$arg) {
-        if (empty($arg)) {
+    foreach ($_POST as &$element) {
+        if (empty($element)) {
             echo json_encode(['message' => 'Please fill in all fields.', 'success' => false]);
             die();
         }
-        $arg = htmlspecialchars($arg);
+        $element = htmlspecialchars($element);
     }
 
     $email = $_POST['email'];
     $password = $_POST['password'];
-
+    
     $user = getUser($email, $db);
 
     if (!$user) {
@@ -78,17 +81,29 @@ if (isset($_GET['login'])) {
         die();
     }
 
-    $_SESSION['user'] = $user;
+    $payload = [
+        'iat' => time(),
+        'exp' => time() + 3600,
+        'id' => $user['id'],
+        'email' => $user['email']
+    ];
+
+    $key = $_ENV['JWT_KEY'];
+
+    $jwt = JWT::encode($payload, $key, 'HS256');
+
+    setcookie('jwtToken', $jwt, time() + 3600000, '/', '', false, true);
 
     echo json_encode([
         'message' => 'User logged in.',
         'success' => true,
-        'user' => [$user['id'], $user['email']],
-        'sessionId' => [session_id()]
+        'user' => [$user['id'], $user['email']]
     ]);
 }
 
 if (isset($_GET['logout'])) {
-    session_destroy();
+    if (isset($_COOKIE['jwtToken'])) {
+        setcookie('jwtToken', $_COOKIE['jwtToken'], time(), '/', '', false, true);
+    }
     echo json_encode(['message' => 'User logged out.', 'success' => true]);
 }

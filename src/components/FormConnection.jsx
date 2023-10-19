@@ -36,7 +36,7 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
         formData.append('email', e.target.email.value);
         formData.append('password', e.target.password.value);
 
-        const response = await fetch('http://localhost/calculator9000/backend/jwtauth.php?login=true', {
+        const response = await fetch('http://localhost/calculator9000/backend/authentication.php?login=true', {
             method: 'POST',
             body: formData,
             credentials: 'include',

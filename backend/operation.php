@@ -5,11 +5,6 @@ use Firebase\JWT\Key;
 
 require_once 'dbConnection.php';
 
-// if (!isset($_SESSION['user'])) {
-//     echo json_encode(['message' => 'Not logged in.', 'success' => false]);
-//     die();
-// }
-
 if (!isset($_COOKIE['jwtToken'])) {
     echo json_encode(['message' => 'Not logged in.', 'success' => false]);
     die();
@@ -32,8 +27,8 @@ if (isset($_GET['save-operation'])) {
     }
     $operation = $_POST['calcul'];
     $result = $_POST['result'];
-    $user_id = $_SESSION['user']['id'];
-
+    $user_id = $decodedToken->id;
+    
     $stmt = $db->prepare('INSERT INTO operation (operation, result, owner_id) VALUES (:operation, :result, :owner_id)');
     $stmt->execute(
         [
