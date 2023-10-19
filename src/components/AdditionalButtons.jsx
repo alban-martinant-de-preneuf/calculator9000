@@ -5,8 +5,9 @@ function AdditionalButtons({ handleAC, handleBack, calcul, result, userConnected
         formData.append('calcul', calcul);
         formData.append('result', result);
 
-        const response = await fetch(`http://localhost/calculator9000/backend/operation.php?save-operation=true&sessionId=${userConnected.sessionId}`, {
+        const response = await fetch(`http://localhost/calculator9000/backend/operation.php?save-operation=true`, {
             method: 'POST',
+            credentials: 'include',
             body: formData,
             headers: {
                 'Accept': 'application/json'

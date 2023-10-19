@@ -39,6 +39,7 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
         const response = await fetch('http://localhost/calculator9000/backend/authentication.php?login=true', {
             method: 'POST',
             body: formData,
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json'
             }
@@ -48,8 +49,7 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
         if (data.success) {
             setUserConnected({
                 isUserConnected: true,
-                user: data.user,
-                sessionId: data.sessionId
+                user: data.user
             });
             setTimeout(() => {
                 setMsg('');

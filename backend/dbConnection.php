@@ -1,24 +1,26 @@
 <?php
 
 header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Credentials: true');
 
-if (isset($_GET['sessionId'])) {
-    session_id($_GET['sessionId']);
-}
+require_once 'vendor/autoload.php';
 
 session_start();
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 
 $db = getDatabase();
 
 function getDatabase(): PDO {
     try {
-        $db_config = parse_ini_file('db.ini');
         $db = new PDO(
-            $db_config['type'] . ':dbname=' . $db_config['name']
-                . ';host=' . $db_config['host']
-                . ';charset=' . $db_config['charset'],
-            $db_config['user'],
-            $db_config['password']
+            $_ENV['TYPE'] . ':dbname=' . $_ENV['DBNAME']
+                . ';host=' . $_ENV['HOST']
+                . ';charset=' . $_ENV['CHARSET'],
+            $_ENV['USER'],
+            $_ENV['PASSWORD']
         );
         $db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
     } catch(PDOException $e) {
