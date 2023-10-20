@@ -98,7 +98,7 @@
     width: 144px;
 }
 
-#modal_container {
+.modal_container {
     position: fixed;
     top: 0;
     left: 0;
@@ -119,6 +119,19 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+#over9000_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#img_over9000 {
+    width: 400px;
 }
 
 .switch_button {

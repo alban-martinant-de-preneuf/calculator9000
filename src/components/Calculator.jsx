@@ -62,6 +62,17 @@ function Calculator({ displayForm, userConnected }) {
         calcul.length > 1 ? setCalcul(calcul.slice(0, -1)) : setCalcul(0);
     }
 
+    const [displayOver9000, setDisplayOver9000] = useState(false);
+
+    useEffect(() => {
+        if (result > 9000) {
+            setDisplayOver9000(true);
+            setTimeout(() => {
+                setDisplayOver9000(false);
+            }, 2000);
+        }
+    }, [result]);
+
     return (
         <>
             <main>
@@ -74,7 +85,7 @@ function Calculator({ displayForm, userConnected }) {
                     </div>
                     <EqualButton handleEqual={handleEqual} />
                 </div>
-                {result > 9000 && <Over9000 />}
+                {displayOver9000 && <Over9000 />}
             </main>
         </>
     );
