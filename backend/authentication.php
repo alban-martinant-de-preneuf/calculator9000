@@ -93,7 +93,7 @@ if (isset($_GET['login'])) {
 
     $jwt = JWT::encode($payload, $key, 'HS256');
 
-    setcookie('jwtToken', $jwt, time() + 3600000, '/', '', false, true);
+    setcookie('jwtToken', $jwt, time() + 3600, '/', '', false, true);
 
     echo json_encode([
         'message' => 'User logged in.',
@@ -115,15 +115,12 @@ if (isset($_GET['check-auth'])) {
         $key = $_ENV['JWT_KEY'];
         try {
             $decodedToken = JWT::decode($jwtToken, new Key($key, 'HS256'));
-            if ($decodedToken->exp < time()) {
-                throw new Exception('Token expired.');
-            }
             echo json_encode([
                 'message' => 'User logged in.',
                 'success' => true,
                 'user' => [$decodedToken->id, $decodedToken->email]]);
         } catch (Exception $e) {
-            echo json_encode(['message' => 'Not logged in.', 'success' => false]);
+            echo json_encode(['message' => 'Not logged in.' . $e, 'success' => false]);
             die();
         }
     } else {

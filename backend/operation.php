@@ -15,9 +15,6 @@ $key = $_ENV['JWT_KEY'];
 
 try {
     $decodedToken = JWT::decode($jwtToken, new Key($key, 'HS256'));
-    if ($decodedToken->exp < time()) {
-        throw new Exception('Token expired.');
-    }
 } catch (Exception $e) {
     echo json_encode(['message' => 'Not logged in.', 'success' => false]);
     die();

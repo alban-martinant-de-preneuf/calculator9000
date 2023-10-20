@@ -3,6 +3,7 @@ import BeautifulScreen from './BeautifulScreen';
 import NumberButton from './NumberButton';
 import OperatorButton from './OperatorButton';
 import EqualButton from './EqualButton';
+import Over9000 from './Over9000';
 import { useState, useEffect } from 'react';
 import AdditionalButtons from './AdditionalButtons';
 
@@ -63,16 +64,18 @@ function Calculator({ displayForm, userConnected }) {
 
     return (
         <>
-            <div className="calculator">
-                <BeautifulScreen calcul={calcul} result={result} />
-                <AdditionalButtons handleAC={handleAC} handleBack={handleBack} userConnected={userConnected} calcul={calcul} result={result} />
-                <div className="numbers_operators_div">
-                    <NumberButton handleClick={handleClick} />
-                    <OperatorButton handleClick={handleClick} />
+            <main>
+                <div className="calculator">
+                    <BeautifulScreen calcul={calcul} result={result} />
+                    <AdditionalButtons handleAC={handleAC} handleBack={handleBack} userConnected={userConnected} calcul={calcul} result={result} />
+                    <div className="numbers_operators_div">
+                        <NumberButton handleClick={handleClick} />
+                        <OperatorButton handleClick={handleClick} />
+                    </div>
+                    <EqualButton handleEqual={handleEqual} />
                 </div>
-                <EqualButton handleEqual={handleEqual} />
-            </div>
-            {result > 9000 && <h2>IT'S OVER 9000 !</h2>}
+                {result > 9000 && <Over9000 />}
+            </main>
         </>
     );
 }
