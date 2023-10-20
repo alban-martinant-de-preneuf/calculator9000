@@ -1,6 +1,6 @@
 import Title from './Title';
 
-function Header({ handleConnection, userConnected, setUserConnected }) {
+function Header({ handleConnection, userConnected, setUserConnected, handleDisplaySavedCalculations }) {
 
     const handleDisconnection = async () => {
         const response = await fetch('http://localhost/calculator9000/backend/authentication.php?logout=true', {
@@ -20,19 +20,6 @@ function Header({ handleConnection, userConnected, setUserConnected }) {
         }
     }
 
-    const handleCalculationSaved = async () => {
-
-        const response = await fetch(`http://localhost/calculator9000/backend/operation.php?get-operations=true`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-        const data = await response.json();
-        console.log(data);
-    }
-
     return (
         <>
             <header>
@@ -41,7 +28,7 @@ function Header({ handleConnection, userConnected, setUserConnected }) {
                     {userConnected.isUserConnected ? (
                         <>
                             <button className='header_button' onClick={handleDisconnection}>Disconnection</button>
-                            <button className='header_button' onClick={handleCalculationSaved}>Calculations saved</button>
+                            <button className='header_button' onClick={handleDisplaySavedCalculations}>Calculations saved</button>
                         </>
                     ) : (
                         <button className='header_button' onClick={handleConnection}>Connection</button>
