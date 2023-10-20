@@ -115,6 +115,9 @@ if (isset($_GET['check-auth'])) {
         $key = $_ENV['JWT_KEY'];
         try {
             $decodedToken = JWT::decode($jwtToken, new Key($key, 'HS256'));
+            if ($decodedToken->exp < time()) {
+                throw new Exception('Token expired.');
+            }
             echo json_encode([
                 'message' => 'User logged in.',
                 'success' => true,
