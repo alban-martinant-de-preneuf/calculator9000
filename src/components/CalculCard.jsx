@@ -1,17 +1,18 @@
 function CalculCard({ calculations }) {
 
-    const handleDeleteCalcul = async () => {
+    const handleDeleteCalcul = async (e) => {
 
         const response = await fetch(`http://localhost/calculator9000/backend/operation.php?delete-operation=true&id=${calculations.id}`, {
             method: 'DELETE',
-            body: formData,
             credentials: 'include',
             headers: {
                 'Accept': 'application/json'
             }
         });
         const data = await response.json();
-        console.log(data);
+        if (data.success) {
+            e.target.parentNode.parentNode.remove();
+        }
     }
 
     return (

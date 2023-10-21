@@ -34,9 +34,9 @@ function App() {
   });
 
   const [displayForm, setDisplayForm] = useState(false);
-
   const [displaySavedCalculations, setDisplaySavedCalculations] = useState(false);
-
+  const [calculations, setCalculations] = useState([]);
+  
   const handleDisplaySavedCalculations = async () => {
     const response = await fetch(`http://localhost/calculator9000/backend/operation.php?get-operations=true`, {
       method: 'GET',
@@ -51,8 +51,6 @@ function App() {
 
     setDisplaySavedCalculations(!displaySavedCalculations);
   }
-
-  const [calculations, setCalculations] = useState([]);
 
   const handleConnection = () => {
     setDisplayForm(!displayForm);

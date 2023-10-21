@@ -41,6 +41,30 @@ if (isset($_GET['save-operation'])) {
     echo json_encode(['message' => 'Operation saved.', 'success' => true]);
 }
 
+if (isset($_GET['delete-operation'])) {
+    if (!isset($_GET['id'])) {
+        echo json_encode(['message' => 'Nothing to delete.', 'success' => false]);
+        die();
+    }
+    $id = $_GET['id'];
+    $user_id = $decodedToken->id;
+
+    $stmt = $db->prepare('DELETE FROM operation WHERE id = :id AND owner_id = :owner_id');
+    $stmt->execute(
+        [
+            'id' => $id,
+            'owner_id' => $user_id
+        ]
+    );
+
+    if ($stmt->rowCount() === 0) {
+        echo json_encode(['message' => 'Operation not found or current user is not the owner', 'success' => false]);
+        die();
+    }
+
+    echo json_encode(['message' => 'Operation deleted.', 'success' => true]);
+}
+
 if (isset($_GET['get-operations'])) {
 
     $stmt = $db->prepare('SELECT * FROM operation WHERE owner_id = :owner_id');
