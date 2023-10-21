@@ -65,7 +65,7 @@ function FormConnection({ setUserConnected, setDisplayForm }) {
     return (
         <>
             <div className="modal_container">
-                <div id="modal">
+                <div className="modal">
                     <button className="close_button" onClick={() => setDisplayForm(false)}>X</button>
                     <p className='auth_msg'>{msg}</p>
                     {loginOrSignin === 'login' ?
