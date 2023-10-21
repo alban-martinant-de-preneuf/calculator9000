@@ -1,4 +1,4 @@
-function CalculCard({ calculation, setCalculations }) {
+function CalculCard({ calculation, setCalculations, setCalcul, setResult }) {
 
     const handleDeleteCalcul = async (e) => {
 
@@ -16,12 +16,17 @@ function CalculCard({ calculation, setCalculations }) {
         }
     }
 
+    const handleClickCalcul = () => {
+        setCalcul(calculation.operation);
+        setResult(calculation.result);
+    }
+
     return (
         <>
             <li className="calcul_card">
                 <div>
                     <button className="delete_button" onClick={handleDeleteCalcul}>X</button>
-                    {calculation.operation} = {calculation.result}
+                    <p onClick={handleClickCalcul}>{calculation.operation} = {calculation.result}</p>
                 </div>
             </li>
         </>

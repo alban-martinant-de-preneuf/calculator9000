@@ -7,10 +7,7 @@ import Over9000 from './Over9000';
 import { useState, useEffect } from 'react';
 import AdditionalButtons from './AdditionalButtons';
 
-function Calculator({ displayForm, userConnected }) {
-
-    const [calcul, setCalcul] = useState("0");
-    const [result, setResult] = useState(0);
+function Calculator({ displayForm, userConnected, calcul, setCalcul, result, setResult }) {
 
     useEffect(() => {
         if (!displayForm) {

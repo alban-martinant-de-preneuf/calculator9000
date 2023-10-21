@@ -1,7 +1,7 @@
 import CalculCard from "./CalculCard";
 import { useState, useEffect } from "react";
 
-function SavedCalculs({ calculations, setCalculations, setDisplaySavedCalculations }) {
+function SavedCalculs({ calculations, setCalculations, setDisplaySavedCalculations, setCalcul, setResult }) {
 
     const [title, setTitle] = useState('');
 
@@ -23,7 +23,7 @@ function SavedCalculs({ calculations, setCalculations, setDisplaySavedCalculatio
                         <h2 className="saved_cal_title">{title}</h2>
                         <ul>
                             {calculations.map((calculation, id) => (
-                                <CalculCard key={`calcul-${id}`} calculation={calculation} setCalculations={setCalculations} />
+                                <CalculCard key={`calcul-${id}`} calculation={calculation} setCalculations={setCalculations} setCalcul={setCalcul} setResult={setResult} />
                             ))}
                         </ul>
                     </div>
