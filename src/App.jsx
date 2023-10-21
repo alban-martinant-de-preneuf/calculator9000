@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import Calculator from './components/Calculator';
 import FormConnection from './components/FormConnection';
-import SavedCalcul from './components/SavedCalcul';
+import SavedCalculs from './components/SavedCalculs';
 import { useEffect, useState } from 'react';
 import './App.css';
 
@@ -63,7 +63,7 @@ function App() {
       <Header handleConnection={handleConnection} userConnected={userConnected} setUserConnected={setUserConnected} handleDisplaySavedCalculations={handleDisplaySavedCalculations} />
       <Calculator displayForm={displayForm} userConnected={userConnected} />
       {displayForm && <FormConnection setUserConnected={setUserConnected} setDisplayForm={setDisplayForm} />}
-      {displaySavedCalculations && <SavedCalcul calculations={calculations} />}
+      {displaySavedCalculations && <SavedCalculs calculations={calculations} setDisplaySavedCalculations={setDisplaySavedCalculations}/>}
     </>
   )
 }

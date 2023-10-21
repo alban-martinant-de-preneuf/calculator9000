@@ -27,7 +27,7 @@ function Calculator({ displayForm, userConnected }) {
             calcul == 0 ? setCalcul(e.key) : setCalcul(calcul + e.key);
         }
         else if (e.key == '+' || e.key == '-' || e.key == '*' || e.key == '/') {
-            setCalcul(calcul + e.key);
+            setCalcul(prevCalc => prevCalc + e.key);
         }
         else if (e.key == 'Enter') {
             handleEqual();
@@ -67,9 +67,12 @@ function Calculator({ displayForm, userConnected }) {
     useEffect(() => {
         if (result > 9000) {
             setDisplayOver9000(true);
-            setTimeout(() => {
+            const timeoutId = setTimeout(() => {
                 setDisplayOver9000(false);
             }, 2000);
+            return () => {
+                clearTimeout(timeoutId);
+            }
         }
     }, [result]);
 
