@@ -1,8 +1,9 @@
-function CalculCard({ calculations }) {
+function CalculCard({ calculation, setCalculations }) {
 
     const handleDeleteCalcul = async (e) => {
 
-        const response = await fetch(`http://localhost/calculator9000/backend/operation.php?delete-operation=true&id=${calculations.id}`, {
+        console.log(e.target.parentNode.parentNode);
+        const response = await fetch(`http://localhost/calculator9000/backend/operation.php?delete-operation=true&id=${calculation.id}`, {
             method: 'DELETE',
             credentials: 'include',
             headers: {
@@ -11,7 +12,7 @@ function CalculCard({ calculations }) {
         });
         const data = await response.json();
         if (data.success) {
-            e.target.parentNode.parentNode.remove();
+            setCalculations(calculations => calculations.filter((element) => element.id !== calculation.id));
         }
     }
 
@@ -20,7 +21,7 @@ function CalculCard({ calculations }) {
             <li className="calcul_card">
                 <div>
                     <button className="delete_button" onClick={handleDeleteCalcul}>X</button>
-                    {calculations.operation} = {calculations.result}
+                    {calculation.operation} = {calculation.result}
                 </div>
             </li>
         </>

@@ -61,7 +61,7 @@ function App() {
       <Header handleConnection={handleConnection} userConnected={userConnected} setUserConnected={setUserConnected} handleDisplaySavedCalculations={handleDisplaySavedCalculations} />
       <Calculator displayForm={displayForm} userConnected={userConnected} />
       {displayForm && <FormConnection setUserConnected={setUserConnected} setDisplayForm={setDisplayForm} />}
-      {displaySavedCalculations && <SavedCalculs calculations={calculations} setDisplaySavedCalculations={setDisplaySavedCalculations}/>}
+      {displaySavedCalculations && <SavedCalculs calculations={calculations} setCalculations={setCalculations} setDisplaySavedCalculations={setDisplaySavedCalculations}/>}
     </>
   )
 }
