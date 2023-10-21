@@ -1,4 +1,4 @@
-function CalculCard({ calculation, setCalculations, setCalcul, setResult }) {
+function CalculCard({ calculation, setCalculations, setCalcul, setResult, setDisplaySavedCalculations }) {
 
     const handleDeleteCalcul = async (e) => {
 
@@ -19,6 +19,7 @@ function CalculCard({ calculation, setCalculations, setCalcul, setResult }) {
     const handleClickCalcul = () => {
         setCalcul(calculation.operation);
         setResult(calculation.result);
+        setDisplaySavedCalculations(false);
     }
 
     return (

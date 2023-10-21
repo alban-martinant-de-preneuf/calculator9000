@@ -21,9 +21,9 @@ function SavedCalculs({ calculations, setCalculations, setDisplaySavedCalculatio
                     <button className="close_button" onClick={() => setDisplaySavedCalculations(false)}>X</button>
                     <div className="saved_cal_div">
                         <h2 className="saved_cal_title">{title}</h2>
-                        <ul>
+                        <ul id="saved_cal_list">
                             {calculations.map((calculation, id) => (
-                                <CalculCard key={`calcul-${id}`} calculation={calculation} setCalculations={setCalculations} setCalcul={setCalcul} setResult={setResult} />
+                                <CalculCard key={`calcul-${id}`} calculation={calculation} setCalculations={setCalculations} setCalcul={setCalcul} setResult={setResult} setDisplaySavedCalculations={setDisplaySavedCalculations} />
                             ))}
                         </ul>
                     </div>
