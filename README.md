@@ -1,7 +1,7 @@
 # Calculator9000
 
 ## Description
-Calculator9000 is a simple calculator application built using React and PHP. It allows users to perform basic calculations and provides the option for logged-in users to save their calculations. User authentication is implemented using JWT (JSON Web Tokens) with firebase/php-jwt.
+Calculator9000 is a simple calculator application built using React and PHP. It allows users to perform basic calculations and provides the option for logged-in users to save their calculations. User authentication is implemented using JWT (JSON Web Tokens) with firebase/php-jwt. The project is visible at [alban-martinant-de-preneuf.students-laplateforme.io/calculator9000/](https://alban-martinant-de-preneuf.students-laplateforme.io/calculator9000/).
 
 ## Features
 
@@ -41,7 +41,7 @@ DBNAME=YOUR_MARIADB_DATABASE
 TYPE=mysql
 ```
 
-3. Execute the provided SQL script 'database.sql' located in the 'backend' directory to create the necessary tables.
+3. Execute the provided SQL script 'calculator9000.sql' located in the 'backend' directory to create the necessary tables.
 
 4. Set up the PHP server with your preferred method (e.g., Apache, Nginx, etc.).
 
